@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.serviceopolis.SpringBootJPAWebService.entities.Order;
-import com.serviceopolis.SpringBootJPAWebService.entities.User;
 import com.serviceopolis.SpringBootJPAWebService.repositories.OrderRepository;
 
 @Service
@@ -21,7 +20,7 @@ public class OrderService {
 	}
 	
 	public Order findById(Long id) {
-		Optional<Order> order = repo.findById(id);
-		return order.get();
+		Optional<Order> obj = repo.findById(id);
+		return obj.get();
 	}
 }
