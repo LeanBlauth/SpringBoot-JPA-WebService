@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.serviceopolis.SpringBootJPAWebService.entities.Category;
 import com.serviceopolis.SpringBootJPAWebService.entities.Order;
+import com.serviceopolis.SpringBootJPAWebService.entities.OrderItem;
 import com.serviceopolis.SpringBootJPAWebService.entities.Product;
 import com.serviceopolis.SpringBootJPAWebService.entities.User;
 import com.serviceopolis.SpringBootJPAWebService.entities.enums.OrderStatus;
 import com.serviceopolis.SpringBootJPAWebService.repositories.CategoryRepository;
+import com.serviceopolis.SpringBootJPAWebService.repositories.OrderItemRepository;
 import com.serviceopolis.SpringBootJPAWebService.repositories.OrderRepository;
 import com.serviceopolis.SpringBootJPAWebService.repositories.ProductRepository;
 import com.serviceopolis.SpringBootJPAWebService.repositories.UserRepository;
@@ -30,6 +32,8 @@ public class TestConfig implements CommandLineRunner {
 	private CategoryRepository categoryRepo;
 	@Autowired
 	private ProductRepository productRepo;
+	@Autowired
+	private OrderItemRepository orderItemRepo;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -59,7 +63,7 @@ public class TestConfig implements CommandLineRunner {
 		p5.getCategories().add(cat6);
 		p6.getCategories().add(cat1);
 		
-		productRepo.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6)); 
+		productRepo.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
 		
 		User u1 = new User(null, "Rudolph", "rudy@gmail.com", "5549999999", "12345");
 		User u2 = new User(null, "Mr. Potato Roosevelt", "potato@gmail.com", "5549966778", "76543");
@@ -70,6 +74,13 @@ public class TestConfig implements CommandLineRunner {
 		
 		userRepo.saveAll(Arrays.asList(u1, u2));
 		orderRepo.saveAll(Arrays.asList(o1, o2, o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepo.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
 	}
 
