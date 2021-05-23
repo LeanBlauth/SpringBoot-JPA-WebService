@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.serviceopolis.SpringBootJPAWebService.entities.Category;
 import com.serviceopolis.SpringBootJPAWebService.entities.Order;
 import com.serviceopolis.SpringBootJPAWebService.entities.OrderItem;
+import com.serviceopolis.SpringBootJPAWebService.entities.Payment;
 import com.serviceopolis.SpringBootJPAWebService.entities.Product;
 import com.serviceopolis.SpringBootJPAWebService.entities.User;
 import com.serviceopolis.SpringBootJPAWebService.entities.enums.OrderStatus;
@@ -81,6 +82,11 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepo.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-07-22T17:21:22Z"), o3);
+		o3.setPayment(pay1);
+		
+		orderRepo.save(o3);
 		
 	}
 
