@@ -3,6 +3,8 @@ package com.serviceopolis.SpringBootJPAWebService.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,9 +45,13 @@ public class UserService {
 	}
 
 	public User update(Long id, User obj) {
-		User entity = repo.getOne(id);
-		updateData(entity, obj);
-		return repo.save(entity);
+		try {
+			User entity = repo.getOne(id);
+			updateData(entity, obj);
+			return repo.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(e.getMessage());
+		}
 	}
 
 	private void updateData(User entity, User obj) {
