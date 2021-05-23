@@ -28,4 +28,8 @@ public class UserService {
 		return repo.save(obj);
 	}
 	
+	public void delete(Long id) {
+		repo.deleteById(id);
+	}
+	
 }
