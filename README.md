@@ -8,6 +8,6 @@ Web Service project developed with the following characteristics:
 - Test profile with H2 databank
 - Deployment to PostgreSQL database managed by Heroku cloud platform
 
-### DomainModel
+### UML DomainModel
 
 ![](images/DomainModel.png)
